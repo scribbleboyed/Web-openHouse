@@ -15,3 +15,12 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+
+$(document).ready(function() {
+
+	$('.panel-heading').click(function() {
+		$(this).next().fadeToggle();
+	});
+
+});

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914031151) do
+ActiveRecord::Schema.define(version: 20150914193431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,9 +62,17 @@ ActiveRecord::Schema.define(version: 20150914031151) do
     t.string   "start_time"
     t.string   "end_time"
     t.string   "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "event_type"
+    t.integer  "agent_id"
+    t.integer  "listing_id"
+    t.integer  "prospect_id"
   end
+
+  add_index "events", ["agent_id"], name: "index_events_on_agent_id", using: :btree
+  add_index "events", ["listing_id"], name: "index_events_on_listing_id", using: :btree
+  add_index "events", ["prospect_id"], name: "index_events_on_prospect_id", using: :btree
 
   create_table "listings", force: :cascade do |t|
     t.string   "address_1"
@@ -121,6 +129,9 @@ ActiveRecord::Schema.define(version: 20150914031151) do
   add_foreign_key "event_listings", "listings"
   add_foreign_key "event_prospects", "events"
   add_foreign_key "event_prospects", "prospects"
+  add_foreign_key "events", "agents"
+  add_foreign_key "events", "listings"
+  add_foreign_key "events", "prospects"
   add_foreign_key "listings", "agents"
   add_foreign_key "open_houses", "agents"
   add_foreign_key "open_houses", "listings"

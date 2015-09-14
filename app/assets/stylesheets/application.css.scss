@@ -66,6 +66,11 @@ body {
 .panel-heading {
 	font-weight: bold;
 	text-align: left;
+	cursor: pointer;
+}
+
+.panel-body {
+	display: none;
 }
 
 .event-col, .listings-col, .leads-col {

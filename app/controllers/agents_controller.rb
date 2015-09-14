@@ -3,11 +3,6 @@ class AgentsController < ApplicationController
   	@agent = Agent.find(session[:user_id])
   	@listings = @agent.listings
   	@prospects = @agent.prospects
-  	@open_houses = @agent.open_houses
-  	@eventagents = EventAgent.where(agent_id: @agent.id)
-  	@events = []
-  	@eventagents.each do |eventagent|
-  		@events << Event.find(eventagent.event_id)
-  	end
+    @events = @agent.events
   end
 end
