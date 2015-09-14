@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-	has_many :agents, through: :event_agents
-	has_many :listings, through: :event_listings
-	has_many :prospects, through: :event_prospects
+	belongs_to :agent
+	belongs_to :listing
+	belongs_to :prospect
 end
