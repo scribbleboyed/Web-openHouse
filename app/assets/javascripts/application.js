@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
@@ -23,4 +24,22 @@ $(document).ready(function() {
 		$(this).next().fadeToggle();
 	});
 
+	$('[data-toggle="tooltip"]').tooltip(); 
+
+	$('#show-events').click(function() {
+		$('.event-body').fadeToggle();
+	})
+
+	$('#show-listings').click(function() {
+		$('.listing-body').fadeToggle();
+	})
+
+	$('#show-leads').click(function() {
+		$('.lead-body').fadeToggle();
+	})
+
+});
+
+$(function() {
+  $('#datePicker').datepicker();
 });

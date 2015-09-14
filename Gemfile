@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'jquery-ui-rails'
 gem 'faker'
 gem 'awesome_print'
 gem 'bcrypt-ruby', '3.1.2'

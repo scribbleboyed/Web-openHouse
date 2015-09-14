@@ -7,4 +7,8 @@ class Agent < ActiveRecord::Base
 	has_many :prospects
 	has_many :open_houses
 	has_many :events
+
+	def full_name
+      "#{first_name} #{last_name}"
+    end
 end

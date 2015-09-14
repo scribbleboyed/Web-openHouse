@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui
  */
 
 @import "bootstrap-sprockets";
@@ -21,8 +22,8 @@ $addButtonBorderColor: #ccc;
 $addButtonTextColor: #666;
 
 body {
-	font-family: sans-serif;
-	font-size: 13px;
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 15px;
 	text-align: center;
 }
 
@@ -41,12 +42,12 @@ body {
 
 .jumbotron {
 	color: #666;
-	border: 1px solid #ccc;
+	background: #fff;
 }
 
 .panel {
 	border-radius: 0px;
-	box-shadow: 1px 2px 2px #ddd;
+	box-shadow: 1px 2px 2px #eee;
 }
 
 .btn, .form-control {
@@ -107,11 +108,17 @@ h3 {
 button {
 	vertical-align: middle;
 	float: right;
-	margin-left: 20px;
+	margin-left: 10px;
 }
 
 .add {
 	color: $addButtonTextColor;
 	border-color: $addButtonBorderColor;
 	box-shadow: 1px 1px 1px #ddd;
+}
+
+/* forms */
+
+.collectionForm {
+	width: 100%;
 }
