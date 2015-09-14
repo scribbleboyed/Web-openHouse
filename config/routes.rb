@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#new', as: :new_session
 
   get '/dashboard' => 'agents#index', as: :agent
+  post '/create_listing' => 'listings#create', as: :create_listing
+  post '/create_prospect' => 'prospects#create', as: :create_prospect
 end

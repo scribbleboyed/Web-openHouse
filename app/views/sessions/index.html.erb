@@ -12,13 +12,25 @@
 		<%= f.submit "Login", class: "btn btn-default" %>
 	 <% end %>
 </div>
+            <button type="button" class="btn btn-default btn-sm add-event" data-toggle="modal" data-target="#signUpModal">
+            	Sign Up
+            </button>
 
-<div class="signUp">
-	<%= form_for(:agent, url: create_user_path, html: {class: "navbar-form"}) do |f| %>
-		<% flash.each do |key,value|  %>
-			<div class="<%= key %>" > <%= value %> </div>
-		<% end %>
-		     
+  <div id="signUpModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content"  >
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Create a New Account</h4>
+        </div>
+        <div class="modal-body">
+          <%= form_for(:agent, url: create_user_path, html: {class: "navbar-form"}) do |f| %>
+            <% flash.each do |key,value|  %>
+              <div class="<%= key %>" > <%= value %> </div>
+            <% end %>
+                 
 		<div><%= f.text_field :first_name, class: "form-control", placeholder: "First Name"  %></div>
 		<div><%= f.text_field :last_name, class: "form-control", placeholder: "Last Name"  %></div>
 		<div><%= f.text_field :phone, class: "form-control", placeholder: "Phone Number"  %></div>
@@ -27,5 +39,9 @@
 		<div><%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Password"  %></div>
 		
 		<%= f.submit "Sign Up", class: "btn btn-default" %>
-	<% end %>
-</div>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
