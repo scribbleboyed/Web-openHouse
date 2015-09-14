@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911223533) do
+ActiveRecord::Schema.define(version: 20150914031151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 20150911223533) do
     t.integer  "agent_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "status"
+    t.integer  "price"
   end
 
   add_index "listings", ["agent_id"], name: "index_listings_on_agent_id", using: :btree
@@ -107,8 +109,10 @@ ActiveRecord::Schema.define(version: 20150911223533) do
     t.string   "notes"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "agent_id"
   end
 
+  add_index "prospects", ["agent_id"], name: "index_prospects_on_agent_id", using: :btree
   add_index "prospects", ["open_house_id"], name: "index_prospects_on_open_house_id", using: :btree
 
   add_foreign_key "event_agents", "agents"
@@ -120,5 +124,6 @@ ActiveRecord::Schema.define(version: 20150911223533) do
   add_foreign_key "listings", "agents"
   add_foreign_key "open_houses", "agents"
   add_foreign_key "open_houses", "listings"
+  add_foreign_key "prospects", "agents"
   add_foreign_key "prospects", "open_houses"
 end

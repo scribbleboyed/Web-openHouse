@@ -1,33 +1,31 @@
 <h2> Welcome to the Agent Manual </h2>
 
-<%= form_for :agent, url: create_session_path do |f| %>
-     
-      <% flash.each do |key,value|  %>
-         <div class="<%= key %>" > <%= value %> </div>
-      <% end %>
-     
-      <%= f.label :email %>
-      <%= f.email_field :email %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.submit "Login" %>
- <% end %>
-
 <div class="login">
- <%= form_for :agent, url: create_session_path do |f| %>
-     
-      <% flash.each do |key,value|  %>
-         <div class="<%= key %>" > <%= value %> </div>
-      <% end %>
-     
-      <%= f.label :email %>
-      <%= f.email_field :email %>
+	<%= form_for(:agent, url: new_session_path, html: {class: "navbar-form"}) do |f| %>
+		<% flash.each do |key,value|  %>
+			<div class="<%= key %>" > <%= value %> </div>
+		<% end %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+		<div class="form-group"><%= f.email_field :email, class: "form-control", placeholder: "Email" %></div>
+		<div><%= f.password_field :password, class: "form-control", placeholder: "Password" %></div>
 
-      <%= f.submit "Login" %>
- <% end %>
+		<%= f.submit "Login", class: "btn btn-default" %>
+	 <% end %>
+</div>
+
+<div class="signUp">
+	<%= form_for(:agent, url: create_user_path, html: {class: "navbar-form"}) do |f| %>
+		<% flash.each do |key,value|  %>
+			<div class="<%= key %>" > <%= value %> </div>
+		<% end %>
+		     
+		<div><%= f.text_field :first_name, class: "form-control", placeholder: "First Name"  %></div>
+		<div><%= f.text_field :last_name, class: "form-control", placeholder: "Last Name"  %></div>
+		<div><%= f.text_field :phone, class: "form-control", placeholder: "Phone Number"  %></div>
+		<div><%= f.email_field :email, class: "form-control", placeholder: "Email"  %></div>
+		<div><%= f.password_field :password, class: "form-control", placeholder: "Password"  %></div>
+		<div><%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Password"  %></div>
+		
+		<%= f.submit "Sign Up", class: "btn btn-default" %>
+	<% end %>
 </div>

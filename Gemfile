@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'bcrypt-ruby' , '~> 3.0.0'
+gem 'faker'
+gem 'awesome_print'
+gem 'bcrypt-ruby', '3.1.2'
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use postgresql as the database for Active Record
