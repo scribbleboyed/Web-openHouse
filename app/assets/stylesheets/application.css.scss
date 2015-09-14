@@ -66,11 +66,6 @@ body {
 .panel-heading {
 	font-weight: bold;
 	text-align: left;
-	cursor: pointer;
-}
-
-.panel-body {
-	display: none;
 }
 
 .event-col, .listings-col, .leads-col {
@@ -115,9 +110,3 @@ button {
 	border-color: $addButtonBorderColor;
 	box-shadow: 1px 1px 1px #ddd;
 }
-
-/* status colors */
-
-.status-active { color: green }
-.status-sold { color: red }
-.status-escrow { color: blue }

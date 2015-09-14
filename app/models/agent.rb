@@ -6,5 +6,5 @@ class Agent < ActiveRecord::Base
 	has_many :listings
 	has_many :prospects
 	has_many :open_houses
-	has_many :events
+	has_many :events, through: :event_agents
 end

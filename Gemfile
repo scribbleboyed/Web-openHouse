@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'pry-rails'
 gem 'faker'
 gem 'awesome_print'
 gem 'bcrypt-ruby', '3.1.2'
