@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#new', as: :new_session
 
   get '/dashboard' => 'agents#index', as: :agent
+
+  get '/event/:id' => 'events#show', as: :event
   post '/create_event' => 'events#create', as: :create_event
+  post '/event/:id/edit' => 'events#update', as: :edit_event
+  delete '/event/:id/delete' => 'events#destroy', as: :destroy_event
+
   post '/create_listing' => 'listings#create', as: :create_listing
   post '/create_prospect' => 'prospects#create', as: :create_prospect
 end

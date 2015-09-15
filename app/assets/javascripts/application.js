@@ -38,6 +38,60 @@ $(document).ready(function() {
 		$('.lead-body').fadeToggle();
 	})
 
+    $('.panel-body').find('button').hide();
+
+    $('.panel-body').hover(function() {
+            $(this).find('button').fadeToggle();
+        }
+    );
+
+    $('.inputField').attr('disabled','disabled');
+
+    $('#edit-event').click(function() {
+        $('.saveButton').toggle();
+        if ($('.editable').attr('disabled')) {
+            $('.editable').removeAttr('disabled');
+            $('.editable').parent().addClass('editMode');
+        } else {
+            $('.editable').attr('disabled', 'disabled');
+            $('.editable').parent().removeClass('editMode');
+        }
+    })
+
+	// $('.edit').on('click', function() {
+
+ //        var id = $(this).attr('data-id');
+ //        var data = {};
+        
+ //        //pseudocode of building data object
+ //        data['event_type'] = $('.edit-event-form').find('[id="event_event_type"]');
+ //        data['title'] = $('.edit-event-form').find('[id="event_title"]');
+ //        data['date'] = $('.edit-event-form').find('[id="event_date"]');
+ //        data['start_time'] = $('.edit-event-form').find('[id="event_start_time"]');
+ //        data['end_time'] = $('.edit-event-form').find('[id="event_end_time"]');
+ //        data['agent_id'] = $('.edit-event-form').find('[id="event_agent_id"]');
+ //        data['listing_id'] = $('.edit-event-form').find('[id="event_listing_id"]');
+ //        data['prospect_id'] = $('.edit-event-form').find('[id="event_prospect_id"]');
+
+ //        $.ajax({
+ //        	//build correct ajax parameters
+ //            url: '/event/' + id,
+ //            method: 'POST',
+ //            //data is the user supplied edits in the modal that we package up
+ //            data: data
+ //            //when our updates on the server succeed, our success handler below will run,
+ //            //we need to grab the response(which is an updated event object), and upate the DOM so
+ //            //that the newly updated object is displayed to the user
+ //        }).success(function(response) {
+            
+ //            //get returned json object and update correct event DOM elements
+ //            var updatedEvent = JSON.stringify(response);
+            
+ //            //update DOM with updatedEvent
+                
+ //        });
+ //    });
+
 });
 
 $(function() {

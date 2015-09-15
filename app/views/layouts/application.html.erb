@@ -9,6 +9,25 @@
 </head>
 <body>
 
+<div class="nav top">
+  <ul class="nav nav-default pull-left">
+    <li class="title"><a href="#">Agent Manual</a></li>
+  </ul>
+  <ul class="nav nav-tabs pull-right">
+    <li><a href="#">Dashboard</a></li>
+    <li>
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <%= Agent.find(session[:user_id]).full_name %>
+      <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Log Out</a></li> 
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
 <%= yield %>
 
 </body>

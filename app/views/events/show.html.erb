@@ -1,0 +1,101 @@
+<div class="row">
+	<div class="col-md-1">
+        <%= button_to agent_path, method: "get", id: "back-button", class: "btn btn-default btn-md" do %>
+          <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back
+        <% end %>
+    </div>
+	<div class="col-md-10">
+		<div class="panel panel-default">
+  			<div class="panel-heading">
+  		<div class="row">
+  			<div class="col-md-6">
+				<h3><b><%= @event.title %></b></h3>
+  			</div>
+  		</div>
+  		<div class="row">
+  			<div class="col-md-6">
+  				<% if @event.listing_id %>
+  					<h4><%= Listing.find(@event.listing_id).address %></h4>
+  				<% end %>
+  				<% if @event.prospect_id %>
+  					<h4><%= Prospect.find(@event.prospect_id).full_name %></h4>
+  				<% end %>
+  			</div>
+			<div class="col-md-1 col-md-offset-4">
+				<button type="button" id="edit-event" class="btn btn-default btn-md">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
+                </button>
+            </div>
+			<div class="col-md-1">
+				<%= button_to destroy_event_path, method: "delete", id: "delete-button", class: "btn btn-default btn-md" do %>
+                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                <% end %>
+            </div>
+  		</div>
+  			</div>
+  		</div>
+  		<div class="row">
+	  		<div class="col-md-2">
+	  			<ul class="list-group">
+					<li class="list-group-item inputTitle"><b>Date</b></li>
+					<li class="list-group-item inputTitle"><b>Start Time</b></li>
+					<li class="list-group-item inputTitle"><b>End Time</b></li>
+					<% if @event.listing_id %><li class="list-group-item inputTitle"><b>Listing Address</b></li><% end %>
+					<% if @event.prospect_id %><li class="list-group-item inputTitle"><b>Prospect Name</b></li><% end %>
+					<li class="list-group-item inputTitle"><b>Notes</b></li>
+				</ul>
+	  		</div>
+	  		<div class="col-md-4">
+				<ul class="list-group">
+					<%= form_for(:event, url: edit_event_path) do |f| %>
+						<li class="list-group-item"><%= f.text_field :date, class: "inputField editable", value: @event.date %></li>
+						<li class="list-group-item"><%= f.text_field :start_time, class: "inputField editable", value: @event.start_time %></li>
+						<li class="list-group-item"><%= f.text_field :end_time, class: "inputField editable", value: @event.end_time %></li>
+						<% if @event.listing_id %>
+							<li class="list-group-item"><%= Listing.find(@event.listing_id).address %></li>
+						<% end %>
+						<% if @event.prospect_id %>
+							<li class="list-group-item"><%= Prospect.find(@event.prospect_id).full_name %></li>
+						<% end %>
+						<li class="list-group-item textArea"><%= f.text_area(:event, class: "inputField textArea editable", value: @event.notes) %></li>
+				</ul>
+						<%= f.submit "Save", class: "btn btn-default saveButton" %>
+					<% end %>
+			</div>
+			<div class="col-md-6">
+				<ul class="list-group">
+					<% if @event.listing_id %>
+						<li class="list-group-item" style="background: url(<%=Listing.find(@event.listing_id).image_url%>) center no-repeat; height: 300px; background-size: cover;"></li>
+					<% end %>
+
+
+
+					<% if @event.prospect_id %>
+	  		<div class="col-md-4">
+	  			<ul class="list-group">
+					<li class="list-group-item inputTitle"><b>Name</b></li>
+					<li class="list-group-item inputTitle"><b>Phone Number</b></li>
+					<li class="list-group-item inputTitle"><b>Email</b></li>
+					<% if @prospect.open_house_id %><li class="list-group-item inputTitle"><b>Open House</b></li><% end %>
+					<li class="list-group-item inputTitle"><b>Notes</b></li>
+				</ul>
+	  		</div>
+	  		<div class="col-md-8">
+				<ul class="list-group">
+						<li class="list-group-item"><%= @prospect.full_name %></li>
+						<li class="list-group-item"><%= @prospect.phone %></li>
+						<li class="list-group-item"><%= @prospect.email %></li>
+						<% if @prospect.open_house_id %>
+							<li class="list-group-item"><%= Listing.find(@prospect.open_house_id).address %></li>
+						<% end %>
+						<li class="list-group-item textArea"><%= @prospect.notes %></li>
+				</ul>
+			</div>
+					<% end %>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-1"></div>
+</div>

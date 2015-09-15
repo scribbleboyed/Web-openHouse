@@ -31,18 +31,34 @@ body {
 	padding: 50px;
 }
 
+.top {
+	border-bottom: 1px solid #ccc;
+}
+
+.nav {
+	border: none;
+}
+
 .signUp {
 	padding: 50px;
 	background: #ddd;
 }
-
+.nav {
+	background: #fff;
+}
 .nav-pills li {
 	border-radius: 0px;
 }
 
 .jumbotron {
 	color: #666;
-	background: #fff;
+	background: #eee;
+	border-bottom: 1px solid #ccc;
+	box-shadow: 1px 3px 5px #eee;
+}
+
+.dashboard-body {
+	height: 1000px;
 }
 
 .panel {
@@ -70,9 +86,6 @@ body {
 	cursor: pointer;
 }
 
-.panel-body {
-	display: none;
-}
 
 .event-col, .listings-col, .leads-col {
 	text-align: left;
@@ -103,6 +116,10 @@ h3 {
 	vertical-align: middle;
 }
 
+.list-group {
+	box-shadow: 1px 1px 1px #ddd;
+}
+
 /* buttons */
 
 button {
@@ -117,8 +134,53 @@ button {
 	box-shadow: 1px 1px 1px #ddd;
 }
 
+#back-button {
+	color: $addButtonTextColor;
+	border-color: $addButtonBorderColor;
+	box-shadow: 1px 1px 1px #ddd;
+}
+
 /* forms */
 
 .collectionForm {
 	width: 100%;
+}
+
+.inputTitle {
+	height: 52px;
+	line-height: 20px;
+	background: #fff;
+}
+
+.no-border {
+	border: none;
+	box-shadow: none;
+}
+
+.inputField {
+	width: 100%;
+	text-align: center;
+	border: none;
+}
+
+.list-group-item {
+	height: 40px;
+}
+
+li.textArea {
+	height: 230px;
+}
+
+.textArea {
+	height: 100px;
+}
+
+.editMode {
+	color: red;
+	font-weight: bold;
+}
+
+.saveButton {
+	display: none;
+	box-shadow: 1px 1px 1px #ddd;
 }
