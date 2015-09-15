@@ -1,5 +1,11 @@
 class ListingsController < ApplicationController
 
+	def show
+		@listing = Listing.find(params[:id])
+		@agent = @listing.agent
+		@events = Event.where(listing_id: @listing.id)
+	end
+
 	def create
 		listing = Listing.new(listing_params)
 		listing.agent_id = session[:user_id]

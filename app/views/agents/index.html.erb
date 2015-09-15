@@ -187,9 +187,9 @@
                       <br/><%= listing.city %>, <%= listing.state %> <%= listing.zip_code %>
                   </div>
                   <div class="col-md-2">
-                    <button type="button" id="show-events" class="btn btn-default btn-sm">
+                        <%= button_to listing_path(id: listing.id), method: "get", class: "btn btn-default btn-sm" do %>
                       <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> View
-                    </button>
+                      <% end %>
                   </div>
                 </div>  
                 <div class="row">

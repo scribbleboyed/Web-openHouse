@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post '/event/:id/edit' => 'events#update', as: :edit_event
   delete '/event/:id/delete' => 'events#destroy', as: :destroy_event
 
+  get '/listing/:id' => 'listings#show', as: :listing
+  
   post '/create_listing' => 'listings#create', as: :create_listing
   post '/create_prospect' => 'prospects#create', as: :create_prospect
 end
