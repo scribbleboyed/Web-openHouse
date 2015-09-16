@@ -53,7 +53,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-3"><p class="attrTitle">Lot Size</p></div>
-								<div class="col-md-9"><%= f.text_field :sqft, class: "inputField editable", value: @listing.sqft %></div>
+								<div class="col-md-9"><%= f.text_field :sqft, class: "inputField editable", value: @listing.sqft %> sqft</div>
 							</div>
 							<div class="row">
 								<div class="col-md-3"><p class="attrTitle">Beds</p></div>
@@ -69,11 +69,15 @@
 							</div>
 							<div class="row">
 								<div class="col-md-3"><p class="attrTitle">Price</p></div>
-								<div class="col-md-9"><%= f.text_field :price, class: "inputField editable", value: @listing.price %></div>
+								<div class="col-md-9">$<%= f.text_field :price, class: "inputField editable", value: @listing.price %></div>
 							</div>
 							<div class="row">
 								<div class="col-md-3"><p class="attrTitle">Description</p></div>
 								<div class="col-md-9"><%= f.text_area :description, class: "inputField textArea editable", value: @listing.description %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Image URL</p></div>
+								<div class="col-md-9"><%= f.text_field :image_url, class: "inputField editable", value: @listing.image_url %></div>
 							</div>
 							<div class="row">
 								<div class="col-md-2 col-md-offset-10"><%= f.submit "Save", class: "btn btn-default saveButton" %></div>
@@ -97,9 +101,9 @@
 										<p class="attrTitle">Email</p>
 									</div>
 									<div class="col-md-9">
-										<p class="attrValue"><%= @agent.full_name %></p>
-										<p class="attrValue"><%= @agent.phone %></p>
-										<p class="attrValue"><%= @agent.email %></p>
+										<p class="attrValue"><%= @listing_agent.full_name %></p>
+										<p class="attrValue"><%= @listing_agent.phone %></p>
+										<p class="attrValue"><%= @listing_agent.email %></p>
 									</div>
 								</div>
 							</div>

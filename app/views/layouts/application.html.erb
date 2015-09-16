@@ -21,13 +21,48 @@
       <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; <%= Agent.find(session[:user_id]).full_name %>
       <span class="caret"></span></a>
       <ul class="dropdown-menu">
+        <li>
+          <a data-toggle="modal" data-target="#editProfileModal">Edit Profile</a>
+        </li> 
         <li><%= link_to "Log Out", destroy_session_path %></li> 
       </ul>
     </li>
   </ul>
 </div>
 
+<div id="editProfileModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content"  >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><span class="glyphicon glyphicon-user"></span>&nbsp; Edit Profile</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for(:agent, url: edit_agent_path, html: {class: "navbar-form"}) do |f| %>
+
+          <% flash.each do |key,value|  %>
+            <div class="<%= key %>" > <%= value %> </div>
+          <% end %>
+          
+          <div><%= f.text_field :first_name, class: "form", placeholder: "First Name", value: @agent.first_name %></div>     
+          <div><%= f.text_field :last_name, class: "form", placeholder: "Last Name", value: @agent.last_name %></div>
+          <div><%= f.text_field :phone, class: "form", placeholder: "Phone Number", value: @agent.phone %></div>     
+          <div><%= f.text_field :email, class: "form", placeholder: "Email Address", value: @agent.email %></div>
+          <div><%= f.text_field :image_url, class: "form", placeholder: "Image URL", value: @agent.image_url %></div>
+          <div><%= f.text_field :website, class: "form", placeholder: "Image URL", value: @agent.website %></div>
+          
+          <%= f.submit "Save", class: "btn btn-default" %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <p>
+
 <% end %>
 
 <%= yield %>

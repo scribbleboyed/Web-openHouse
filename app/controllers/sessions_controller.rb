@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
 	def index
-		
 	end
 
 	def new
@@ -20,7 +19,7 @@ class SessionsController < ApplicationController
 	  	@agent = Agent.new(agent_params)
 	  	if @agent.save
 	  		flash[:success] = "User " + @agent.first_name + " created.  Please log in."
-	  		redirect_to agent_path
+	  		redirect_to root_path
 	  	else
 	      flash[:error] = "User could not be created."
 	  		redirect_to root_path
@@ -33,7 +32,7 @@ class SessionsController < ApplicationController
 	  end
 
   def agent_params
-      params.require(:agent).permit(:first_name, :last_name, :phone, :email, :password, :password_confirmation)
+      params.require(:agent).permit(:first_name, :last_name, :phone, :email, :image_url, :website, :password, :password_confirmation)
   end
 
 

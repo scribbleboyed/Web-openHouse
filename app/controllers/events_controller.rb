@@ -7,6 +7,7 @@ class EventsController < ApplicationController
 	end
 
 	def show
+		@agent = Agent.find(session[:user_id])
 		event_id = params[:id]
 		@event = Event.find(event_id)
 		if @event.prospect_id

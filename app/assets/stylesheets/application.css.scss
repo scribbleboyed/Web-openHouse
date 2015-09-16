@@ -24,8 +24,8 @@ $prospectBorder: #D6E0EB;
 $prospectBack: #EBF0F5;
 $listingBorder: #99B2CC;
 $listingBack: #C2D1E0;
-$eventBorder: #85A3C2;
-$eventBack: #ADC2D6;
+$eventBorder: #ddd;
+$eventBack: #eee;
 
 body {
 	font-family: 'Josefin Sans', sans-serif;
@@ -55,8 +55,16 @@ body {
 }
 
 .agent-info {
-	margin-top: 50px;
+	margin-top: 100px;
 	text-align: left;
+}
+
+.agent-edit {
+	margin-top: 160px;
+}
+
+.edit-button {
+	display: inline-block;
 }
 
 .top {
@@ -118,7 +126,7 @@ body {
 }
 
 .dashboard-body {
-	margin-top: 20px;
+	margin-top: 40px;
 	height: 1000px;
 }
 
@@ -204,6 +212,11 @@ button {
 
 .collectionForm {
 	width: 100%;
+}
+
+select {
+	width: 300px;
+	margin: 10px;
 }
 
 .inputTitle {

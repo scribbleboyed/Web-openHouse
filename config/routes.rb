@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy', as: :destroy_session
 
   get '/dashboard' => 'agents#index', as: :agent
+  post '/edit_agent' => 'agents#update', as: :edit_agent
 
   get '/event/:id' => 'events#show', as: :event
   post '/create_event' => 'events#create', as: :create_event

@@ -1,6 +1,7 @@
 class ProspectsController < ApplicationController
 
 	def show
+		@agent = Agent.find(session[:user_id])
 		@prospect = Prospect.find(params[:id])
 		@events = Event.where(prospect_id: @prospect.id)
 	end

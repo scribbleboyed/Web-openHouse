@@ -10,17 +10,15 @@
       </div>
     </div>  -->
 
-    <div class="container dashboard-header">
+    <div class="dashboard-header">
       <div class="row">
-        <div class="col-md-3 col-md-offset-3">
-          <div id="profile" style="background: url('http://i1341.photobucket.com/albums/o756/kfangurl/Daniel%20Henney/DanielHenney047_zps00c81532.jpg') center; width: 250px; height: 250px; background-size: cover;">
+        <div class="col-xs-6 col-sm-4 col-md-2 col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+          <div id="profile" style="background: url('<%= @agent.image_url %>'); center; width: 220px; height: 220px; background-size: cover;">
          </div>
         </div>
-        <div class="col-md-4 agent-info">
+        <div class="col-xs-4 col-sm-4 col-md-4 agent-info">
           <h1><b><%= @agent.full_name %></b></h1>
-          <p><%= @agent.phone %></p>
-          <p><%= @agent.email %></p>
-          <p>www.edwardyehrealty.com</p>
+          <p><%= @agent.phone %> | <%= @agent.email %> | <%= @agent.website %></p>
         </div>
       </div>
     </div>
@@ -82,34 +80,37 @@
                 <% @events.each do |event| %>
                   <div class="panel-heading event-heading collapsable">
                     <div class="row">
-                      <div class="col-md-2 panel-title">
+                      <div class="col-sm-2 col-md-2 panel-title">
                         <% if event.title != "" %><%= event.title %>
                         <% else %><%= event.event_type %>
                         <% end %></div>
-                      <div class="col-md-1"><%= event.date %></div>
-                      <div class="col-md-2"><%= event.start_time %> to <%= event.end_time %></div>
-                      <div class="col-md-2">
-                        <% if event.agent_id %>
-                          <%= Agent.find(event.agent_id).full_name %>
-                        <% end %>
-                      </div>
-                      <% if event.listing_id %>
-                      <div class="col-md-4">
-                          <%= Listing.find(event.listing_id).address %>
-                      </div>
-                      <% end %>
-                      <% if event.prospect_id %>
-                        <div class="col-md-2">
-                          <%= Prospect.find(event.prospect_id).full_name %>
-                        </div>
-                      <% end %>
+                      <div class="col-sm-2 col-md-2"><%= event.date %></div>
+                      <div class="col-sm-2 col-md-2"><%= event.start_time %> to <%= event.end_time %></div>
                     </div>
                   </div>
                   <div class="panel-body event-body">
+                    <% if event.meeting_agent %>
+                      <div class="row">
+                        <div class="col-sm-2 col-md-1 panel-title">Agent</div>
+                        <div class="col-sm-8 col-md-10"><%= Agent.find(event.meeting_agent).full_name %></div>
+                      </div>
+                    <% end %>
+                    <% if event.listing_id %>
+                      <div class="row">
+                        <div class="col-sm-2 col-md-1 panel-title">Listing</div>
+                        <div class="col-sm-8 col-md-10"><%= Listing.find(event.listing_id).address %></div>
+                      </div>
+                    <% end %>
+                    <% if event.prospect_id %>
+                      <div class="row">
+                        <div class="col-sm-2 col-md-1 panel-title">Lead</div>
+                        <div class="col-sm-8 col-md-10"><%= Prospect.find(event.prospect).full_name %></div>
+                      </div>
+                    <% end %>
                     <div class="row">
-                      <div class="col-md-1 panel-title">Notes</div>
-                      <div class="col-md-10"><%= event.notes %><br/>&nbsp;</div>
-                      <div class="col-md-1">
+                      <div class="col-sm-2 col-md-1 panel-title">Notes</div>
+                      <div class="col-sm-8 col-md-10"><%= event.notes %><br/>&nbsp;</div>
+                      <div class="col-sm-2 col-md-1">
                         <%= button_to event_path(id: event.id), method: "get", class: "btn btn-default btn-sm" do %>
                           <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> View
                         <% end %>
@@ -185,8 +186,8 @@
               <% @listings.each do |listing| %>
               <div class="panel-heading listing-heading collapsable">
                 <div class="row">
-                  <div class="col-md-6 panel-title"><%= listing.address_1 %></div>
-                  <div class="col-md-4"><%= listing.city %>, <%= listing.state %> <%= listing.zip_code %></div>
+                  <div class="col-md-5 panel-title"><%= listing.address_1 %></div>
+                  <div class="col-md-5"><%= listing.city %>, <%= listing.state %> <%= listing.zip_code %></div>
                   <div class="col-md-2"><%= listing.status %></div>
                 </div>
               </div>
@@ -215,7 +216,7 @@
                 </div>  
                 <div class="row">
                   <div class="col-md-3 attrTitle">Price</div>
-                  <div class="col-md-9 attrValue"><%= listing.price %></div>
+                  <div class="col-md-9 attrValue">$<%= listing.price %></div>
                 </div>              
               </div>
               <% end %>

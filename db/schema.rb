@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914193431) do
+ActiveRecord::Schema.define(version: 20150916221707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20150914193431) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "image_url"
+    t.string   "website"
   end
 
   create_table "event_agents", force: :cascade do |t|
@@ -62,12 +64,13 @@ ActiveRecord::Schema.define(version: 20150914193431) do
     t.string   "start_time"
     t.string   "end_time"
     t.string   "notes"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "event_type"
     t.integer  "agent_id"
     t.integer  "listing_id"
     t.integer  "prospect_id"
+    t.integer  "meeting_agent"
   end
 
   add_index "events", ["agent_id"], name: "index_events_on_agent_id", using: :btree
