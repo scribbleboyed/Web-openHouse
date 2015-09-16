@@ -20,6 +20,12 @@
 
 $addButtonBorderColor: #ccc;
 $addButtonTextColor: #666;
+$prospectBorder: #D6E0EB;
+$prospectBack: #EBF0F5;
+$listingBorder: #99B2CC;
+$listingBack: #C2D1E0;
+$eventBorder: #85A3C2;
+$eventBack: #ADC2D6;
 
 body {
 	font-family: 'Josefin Sans', sans-serif;
@@ -27,8 +33,30 @@ body {
 	text-align: center;
 }
 
-.login {
-	padding: 50px;
+#intro-title {
+	margin-top: 200px;
+}
+
+#signup-button, #login-button {
+	float: none;
+	box-shadow: 1px 1px 1px #eee;
+}
+
+.login-field {
+	margin-right: 10px;
+	box-shadow: 1px 1px 1px #eee;
+}
+
+#profile {
+	position: relative;
+	bottom: -20px;
+	border: 10px solid #fff;
+	box-shadow: 1px 2px 2px #ccc;
+}
+
+.agent-info {
+	margin-top: 50px;
+	text-align: left;
 }
 
 .top {
@@ -54,12 +82,43 @@ body {
 
 .jumbotron {
 	color: #666;
-	background: #eee;
-	border-bottom: 1px solid #ccc;
-	box-shadow: 1px 3px 5px #eee;
+	background: #fff;
+}
+
+.panel-heading {
+	border-radius: 0px;
+}
+
+.event-panel {
+	border-color: $eventBorder!important;
+}
+
+.event-heading {
+	background-color: $eventBack!important;
+}
+
+.listing-panel {
+	border-color: $listingBorder!important;
+}
+
+.listing-heading {
+	background: $listingBack!important;
+}
+
+.prospect-panel {
+	border-color: $prospectBorder!important;
+}
+
+.prospect-heading {
+	background: $prospectBack!important;
+}
+
+.dashboard-header {
+	background: #EBF0F5;
 }
 
 .dashboard-body {
+	margin-top: 20px;
 	height: 1000px;
 }
 
@@ -87,7 +146,6 @@ body {
 	text-align: left;
 	cursor: pointer;
 }
-
 
 .event-col, .listings-col, .leads-col {
 	text-align: left;
@@ -161,7 +219,7 @@ button {
 
 .inputField {
 	width: 100%;
-	text-align: center;
+	text-align: left;
 	border: none;
 }
 
@@ -174,7 +232,7 @@ li.textArea {
 }
 
 .textArea {
-	height: 100px;
+	height: 150px;
 }
 
 .editMode {

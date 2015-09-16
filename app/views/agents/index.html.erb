@@ -1,16 +1,29 @@
-
-    <!-- Jumbotron Display -->
-
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Agent Manual</h1>
-        <p class="subtext">The only tool you'll need to become a successful real estate agent besides a personality.</p>
-      </div>
-    </div> 
-
     <% flash.each do |key,value|  %>
       <div class="alert alert-<%= key %>" > <%= value %> </div>
     <% end %>
+<!-- 
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="title">Agent Manual</h1>
+        <p class="subtext">The only tool you'll need to become a successful real estate agent besides a personality.</p>
+      </div>
+    </div>  -->
+
+    <div class="container dashboard-header">
+      <div class="row">
+        <div class="col-md-3 col-md-offset-3">
+          <div id="profile" style="background: url('http://i1341.photobucket.com/albums/o756/kfangurl/Daniel%20Henney/DanielHenney047_zps00c81532.jpg') center; width: 250px; height: 250px; background-size: cover;">
+         </div>
+        </div>
+        <div class="col-md-4 agent-info">
+          <h1><b><%= @agent.full_name %></b></h1>
+          <p><%= @agent.phone %></p>
+          <p><%= @agent.email %></p>
+          <p>www.edwardyehrealty.com</p>
+        </div>
+      </div>
+    </div>
 
     <div class="container dashboard-body">
 
@@ -20,7 +33,7 @@
 
           <!-- Open House Column-->
 
-          <h3>Event Schedule</h3>
+          <h3><span class="glyphicon glyphicon-time"></span>&nbsp; Event Schedule</h3>
           <button type="button" class="btn btn-default btn-sm add" data-toggle="modal" data-target="#addEventModal">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Event
           </button>
@@ -37,7 +50,7 @@
               <div class="modal-content"  >
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Add Event</h4>
+                  <h4 class="modal-title"><span class="glyphicon glyphicon-time"></span>&nbsp; Add Event</h4>
                 </div>
                 <div class="modal-body">
                   <%= form_for(:event, url: create_event_path, html: {class: "navbar-form"}) do |f| %>
@@ -65,9 +78,9 @@
           </div>
 
           <div class="view">
-              <div class="panel panel-default">
+              <div class="panel panel-default event-panel">
                 <% @events.each do |event| %>
-                  <div class="panel-heading">
+                  <div class="panel-heading event-heading collapsable">
                     <div class="row">
                       <div class="col-md-2 panel-title">
                         <% if event.title != "" %><%= event.title %>
@@ -121,7 +134,7 @@
 
           <!-- Listings Column-->
 
-          <h3>Listings</h3>
+          <h3><span class="glyphicon glyphicon-home"></span>&nbsp; Listings</h3>
           <button type="button" class="btn btn-default btn-sm add" data-toggle="modal" data-target="#addListingModal">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Listing
           </button>
@@ -136,7 +149,7 @@
               <div class="modal-content"  >
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Add Listing</h4>
+                  <h4 class="modal-title"><span class="glyphicon glyphicon-home"></span>&nbsp; Add Listing</h4>
                 </div>
                 <div class="modal-body">
                   <%= form_for(:listing, url: create_listing_path, html: {class: "navbar-form"}) do |f| %>
@@ -167,10 +180,10 @@
 
           <div class="view">
 
-            <div class="panel panel-info">
+            <div class="panel panel-default listing-panel">
 
               <% @listings.each do |listing| %>
-              <div class="panel-heading">
+              <div class="panel-heading listing-heading collapsable">
                 <div class="row">
                   <div class="col-md-6 panel-title"><%= listing.address_1 %></div>
                   <div class="col-md-4"><%= listing.city %>, <%= listing.state %> <%= listing.zip_code %></div>
@@ -217,7 +230,7 @@
 
         <div class="col-md-6 leads-col">
 
-          <h3>Leads</h3>
+          <h3><span class="glyphicon glyphicon-phone-alt"></span>&nbsp; Leads</h3>
           <button type="button" class="btn btn-default btn-sm add" data-toggle="modal" data-target="#addLeadModal">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Lead
           </button>
@@ -232,7 +245,7 @@
               <div class="modal-content"  >
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Add Lead</h4>
+                  <h4 class="modal-title"><span class="glyphicon glyphicon-phone-alt"></span>&nbsp; Add Lead</h4>
                 </div>
                 <div class="modal-body">
                   <%= form_for(:prospect, url: create_prospect_path, html: {class: "navbar-form"}) do |f| %>
@@ -253,11 +266,11 @@
           </div>
           <div class="view">
 
-            <div class="panel panel-warning">
+            <div class="panel panel-default prospect-panel">
 
               <% @prospects.each do |prospect| %>
 
-                <div class="panel-heading">
+                <div class="panel-heading prospect-heading collapsable">
                   <div class="row">
                     <div class="col-md-4 panel-title"><%= prospect.first_name %> <%= prospect.last_name %></div>
                     <div class="col-md-3"><%= prospect.phone %></div>
@@ -280,9 +293,9 @@
                     <div class="col-md-3 attrTitle">Notes</div>
                     <div class="col-md-7 attrValue"><%= prospect.notes %></div>
                     <div class="col-md-2">
-                    <button type="button" id="show-events" class="btn btn-default btn-sm">
+                        <%= button_to prospect_path(prospect), method: "get", class: "btn btn-default btn-sm" do %>
                       <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> View
-                    </button>
+                      <% end %>
                   </div>
                   </div>
                 </div>

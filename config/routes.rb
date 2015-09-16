@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   post '/new' => 'sessions#create', as: :create_user
   post '/login' => 'sessions#new', as: :new_session
+  get '/logout' => 'sessions#destroy', as: :destroy_session
 
   get '/dashboard' => 'agents#index', as: :agent
 
@@ -14,7 +15,13 @@ Rails.application.routes.draw do
   delete '/event/:id/delete' => 'events#destroy', as: :destroy_event
 
   get '/listing/:id' => 'listings#show', as: :listing
-  
   post '/create_listing' => 'listings#create', as: :create_listing
+  post '/listing/:id/edit' => 'listings#update', as: :edit_listing
+  delete '/listing/:id/delete' => 'events#destroy', as: :destroy_listing
+
+  get '/prospect/:id' => 'prospects#show', as: :prospect
   post '/create_prospect' => 'prospects#create', as: :create_prospect
+  post '/prospect/:id/edit' => 'prospects#update', as: :edit_prospect
+  delete '/prospect/:id/delete' => 'prospects#destroy', as: :destroy_prospect
+
 end

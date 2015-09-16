@@ -1,101 +1,148 @@
 <div class="row">
+
 	<div class="col-md-1">
         <%= button_to agent_path, method: "get", id: "back-button", class: "btn btn-default btn-md" do %>
           <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back
         <% end %>
     </div>
+
 	<div class="col-md-10">
 		<div class="panel panel-default">
-  			<div class="panel-heading">
-  		<div class="row">
-  			<div class="col-md-6">
-				<h3><b><%= @event.title %></b></h3>
-  			</div>
-  		</div>
-  		<div class="row">
-  			<div class="col-md-6">
-  				<% if @event.listing_id %>
-  					<h4><%= Listing.find(@event.listing_id).address %></h4>
-  				<% end %>
-  				<% if @event.prospect_id %>
-  					<h4><%= Prospect.find(@event.prospect_id).full_name %></h4>
-  				<% end %>
-  			</div>
-			<div class="col-md-1 col-md-offset-4">
-				<button type="button" id="edit-event" class="btn btn-default btn-md">
-                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
-                </button>
-            </div>
-			<div class="col-md-1">
-				<%= button_to destroy_event_path, method: "delete", id: "delete-button", class: "btn btn-default btn-md" do %>
-                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
-                <% end %>
-            </div>
-  		</div>
-  			</div>
-  		</div>
-  		<div class="row">
-	  		<div class="col-md-2">
-	  			<ul class="list-group">
-					<li class="list-group-item inputTitle"><b>Date</b></li>
-					<li class="list-group-item inputTitle"><b>Start Time</b></li>
-					<li class="list-group-item inputTitle"><b>End Time</b></li>
-					<% if @event.listing_id %><li class="list-group-item inputTitle"><b>Listing Address</b></li><% end %>
-					<% if @event.prospect_id %><li class="list-group-item inputTitle"><b>Prospect Name</b></li><% end %>
-					<li class="list-group-item inputTitle"><b>Notes</b></li>
-				</ul>
-	  		</div>
-	  		<div class="col-md-4">
-				<ul class="list-group">
-					<%= form_for(:event, url: edit_event_path) do |f| %>
-						<li class="list-group-item"><%= f.text_field :date, class: "inputField editable", value: @event.date %></li>
-						<li class="list-group-item"><%= f.text_field :start_time, class: "inputField editable", value: @event.start_time %></li>
-						<li class="list-group-item"><%= f.text_field :end_time, class: "inputField editable", value: @event.end_time %></li>
-						<% if @event.listing_id %>
-							<li class="list-group-item"><%= Listing.find(@event.listing_id).address %></li>
+			<div class="panel-header">
+				<h3><span class="glyphicon glyphicon-time"></span>&nbsp; <%= @event.title %></h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-default event-panel">
+					<div class="panel-heading event-heading">
+						<div class="row">
+							<div class="col-md-8">
+								<h4><span class="glyphicon glyphicon-time"></span>&nbsp; Event Details</h4>
+							</div>
+							<div class="col-md-2">
+								<button type="button" id="edit-event" class="btn btn-default btn-md">
+		              				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
+		        				</button>
+							</div>
+							<div class="col-md-2">
+								<%= button_to destroy_event_path, method: "delete", id: "delete-button", class: "btn btn-default btn-md" do %>
+                      				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+               					 <% end %>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<%= form_for(:event, url: edit_event_path) do |f| %>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Title</p></div>
+								<div class="col-md-9"><%= f.text_field :title, class: "inputField editable", value: @event.title %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Date</p></div>
+								<div class="col-md-9"><%= f.text_field :date, class: "inputField editable", value: @event.date %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Start Time</p></div>
+								<div class="col-md-9"><%= f.text_field :start_time, class: "inputField editable", value: @event.start_time %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">End Time</p></div>
+								<div class="col-md-9"><%= f.text_field :end_time, class: "inputField editable", value: @event.end_time %></div>
+							</div>
+							<% if @listing %>
+								<div class="row">
+									<div class="col-md-3"><p class="attrTitle">Listing Address</p></div>
+									<div class="col-md-9"><%= f.text_field :listing_id, class: "inputField", value: @listing.address %></div>
+								</div>
+							<% end %>
+							<% if @prospect %>
+								<div class="row">
+									<div class="col-md-3"><p class="attrTitle">Prospect</p></div>
+									<div class="col-md-9"><%= f.text_field :prospect_id, class: "inputField", value: @prospect.full_name %></div>
+								</div>
+							<% end %>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Notes</p></div>
+								<div class="col-md-9"><%= f.text_area :notes, class: "textArea inputField editable", value: @event.notes %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-2 col-md-offset-10"><%= f.submit "Save", class: "btn btn-default saveButton" %></div>
+							</div>
 						<% end %>
-						<% if @event.prospect_id %>
-							<li class="list-group-item"><%= Prospect.find(@event.prospect_id).full_name %></li>
-						<% end %>
-						<li class="list-group-item textArea"><%= f.text_area(:event, class: "inputField textArea editable", value: @event.notes) %></li>
-				</ul>
-						<%= f.submit "Save", class: "btn btn-default saveButton" %>
-					<% end %>
+					</div>
+				</div>
 			</div>
 			<div class="col-md-6">
-				<ul class="list-group">
-					<% if @event.listing_id %>
-						<li class="list-group-item" style="background: url(<%=Listing.find(@event.listing_id).image_url%>) center no-repeat; height: 300px; background-size: cover;"></li>
-					<% end %>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default listing-panel">
+							<div class="panel-heading listing-heading">
+								<span class="glyphicon glyphicon-time"></span>&nbsp; Listing Details
+							</div>
+							<% if @listing %>
+								<div class="panel-body">
+									<div class="row listingImage" style="background: url(<%= @listing.image_url %>) center no-repeat; height: 250px; background-size: cover;">
+                					</div>
+									<div class="row">
+										<div class="col-md-3">
+											<p class="attrTitle">Address</p>
+											<p class="attrTitle">City</p>
+											<p class="attrTitle">State</p>
+											<p class="attrTitle">Zip Code</p>
+										</div>
+										<div class="col-md-9">
+											<p class="attrValue"><%= @listing.address %></p>
+											<p class="attrValue"><%= @listing.city %></p>
+											<p class="attrValue"><%= @listing.state %></p>
+											<p class="attrValue"><%= @listing.zip_code %></p>
+										</div>
+									</div>
+								</div>
+							<% else %>
+								<div class="panel-body">
+									No listing for this event
+								</div>
+							<% end %>
+						</div>
+					</div>
+				</div>
 
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default prospect-panel">
+							<div class="panel-heading prospect-heading">
+								<span class="glyphicon glyphicon-time"></span>&nbsp; Lead Details
+							</div>
+							<% if @prospect %>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-3">
+											<p class="attrTitle">Name</p>
+											<p class="attrTitle">Phone</p>
+											<p class="attrTitle">Email</p>
+											<p class="attrTitle">Notes</p>
+										</div>
+										<div class="col-md-9">
+											<p class="attrValue"><%= @prospect.full_name %></p>
+											<p class="attrValue"><%= @prospect.phone %></p>
+											<p class="attrValue"><%= @prospect.email %></p>
+											<p class="attrValue"><%= @prospect.notes %></p>
+										</div>
+									</div>
+								</div>
+							<% else %>
+								<div class="panel-body">
+									No listing for this event
+								</div>
+							<% end %>
+						</div>
+					</div>
+				</div>
 
-
-					<% if @event.prospect_id %>
-	  		<div class="col-md-4">
-	  			<ul class="list-group">
-					<li class="list-group-item inputTitle"><b>Name</b></li>
-					<li class="list-group-item inputTitle"><b>Phone Number</b></li>
-					<li class="list-group-item inputTitle"><b>Email</b></li>
-					<% if @prospect.open_house_id %><li class="list-group-item inputTitle"><b>Open House</b></li><% end %>
-					<li class="list-group-item inputTitle"><b>Notes</b></li>
-				</ul>
-	  		</div>
-	  		<div class="col-md-8">
-				<ul class="list-group">
-						<li class="list-group-item"><%= @prospect.full_name %></li>
-						<li class="list-group-item"><%= @prospect.phone %></li>
-						<li class="list-group-item"><%= @prospect.email %></li>
-						<% if @prospect.open_house_id %>
-							<li class="list-group-item"><%= Listing.find(@prospect.open_house_id).address %></li>
-						<% end %>
-						<li class="list-group-item textArea"><%= @prospect.notes %></li>
-				</ul>
-			</div>
-					<% end %>
-
-				</ul>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-1"></div>
+	<div class="col-md-1">
+	</div>
 </div>

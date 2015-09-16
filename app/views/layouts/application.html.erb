@@ -2,32 +2,33 @@
 <html>
 <head>
   <title>AgentManual</title>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<% if !current_page?(root_path) %>
 <div class="nav top">
   <ul class="nav nav-default pull-left">
     <li class="title"><a href="#">Agent Manual</a></li>
   </ul>
   <ul class="nav nav-tabs pull-right">
-    <li><a href="#">Dashboard</a></li>
+    <li><%= link_to "Dashboard", agent_path %></li>
     <li>
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <%= Agent.find(session[:user_id]).full_name %>
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp; <%= Agent.find(session[:user_id]).full_name %>
       <span class="caret"></span></a>
       <ul class="dropdown-menu">
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="#">Log Out</a></li> 
+        <li><%= link_to "Log Out", destroy_session_path %></li> 
       </ul>
     </li>
   </ul>
 </div>
 
 <p>
+<% end %>
 
 <%= yield %>
 

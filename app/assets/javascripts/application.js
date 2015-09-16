@@ -21,22 +21,22 @@
 
 $(document).ready(function() {
 
-	$('.panel-heading').click(function() {
-		$(this).next().fadeToggle();
+	$('.collapsable').click(function() {
+		$(this).next().toggle("blind", 100);
 	});
 
 	$('[data-toggle="tooltip"]').tooltip(); 
 
 	$('#show-events').click(function() {
-		$('.event-body').fadeToggle();
+		$('.event-body').toggle("blind");
 	})
 
 	$('#show-listings').click(function() {
-		$('.listing-body').fadeToggle();
+		$('.listing-body').toggle("blind");
 	})
 
 	$('#show-leads').click(function() {
-		$('.lead-body').fadeToggle();
+		$('.lead-body').toggle("blind");
 	})
 
     $('.panel-body').find('button').hide();

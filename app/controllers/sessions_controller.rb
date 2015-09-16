@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
 	def index
+		
 	end
 
 	def new
@@ -25,6 +26,11 @@ class SessionsController < ApplicationController
 	  		redirect_to root_path
 	  	end
   	end
+
+	  def destroy
+	  	reset_session
+	  	redirect_to root_path
+	  end
 
   def agent_params
       params.require(:agent).permit(:first_name, :last_name, :phone, :email, :password, :password_confirmation)

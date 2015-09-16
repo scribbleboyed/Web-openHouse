@@ -9,61 +9,85 @@
 
 			<div class="panel-body" style="background: url('<%= @listing.image_url %>') center no-repeat; height: 450px; background-size: cover;">
 			</div>
-			<div class="panel-footer">
-				<h3><%= @listing.address %></h3>
+			<div class="panel-header">
+				<h3><span class="glyphicon glyphicon-home"></span>&nbsp; <%= @listing.address %></h3>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<div class="panel panel-default">
-					<div class="panel-heading">
+				<div class="panel panel-default listing-panel">
+					<div class="panel-heading listing-heading">
 						<div class="row">
-						<div class="col-md-10">
-							<h4>Property Details</h4>
+						<div class="col-md-8">
+							<h4><span class="glyphicon glyphicon-home"></span>&nbsp; Property Details</h4>
 						</div>
 						<div class="col-md-2">
 							<button type="button" id="edit-event" class="btn btn-default btn-md">
 	              				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
 	        				</button>
 						</div>
+						<div class="col-md-2">
+							<%= button_to destroy_listing_path, method: "delete", id: "delete-button", class: "btn btn-default btn-md" do %>
+                      			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+               				<% end %>
+						</div>
 					</div>
 					</div>
 					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-3">
-								<p class="attrTitle">Address</p>
-								<p class="attrTitle">City</p>
-								<p class="attrTitle">State</p>
-								<p class="attrTitle">Zip Code</p>
-								<p class="attrTitle">Lot Size</p>
-								<p class="attrTitle">Beds</p>
-								<p class="attrTitle">Baths</p>
-								<p class="attrTitle">Status</p>
-								<p class="attrTitle">Price</p>
-								<p class="attrTitle">Description</p>
+						<%= form_for(:listing, url: edit_listing_path) do |f| %>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Address</p></div>
+								<div class="col-md-9"><%= f.text_field :address, class: "inputField editable", value: @listing.address %></div>
 							</div>
-							<div class="col-md-9">
-								<p class="attrValue"><%= @listing.address_1 %></p>
-								<p class="attrValue"><%= @listing.city %></p>
-								<p class="attrValue"><%= @listing.state %></p>
-								<p class="attrValue"><%= @listing.zip_code %></p>
-								<p class="attrValue"><%= @listing.sqft %></p>
-								<p class="attrValue"><%= @listing.bed %></p>
-								<p class="attrValue"><%= @listing.bath %></p>
-								<p class="attrValue"><%= @listing.status %></p>
-								<p class="attrValue"><%= @listing.price %></p>
-								<p class="attrValue"><%= @listing.description %></p>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">City</p></div>
+								<div class="col-md-9"><%= f.text_field :city, class: "inputField editable", value: @listing.city %></div>
 							</div>
-						</div>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">State</p></div>
+								<div class="col-md-9"><%= f.text_field :state, class: "inputField editable", value: @listing.state %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Zip Code</p></div>
+								<div class="col-md-9"><%= f.text_field :zip_code, class: "inputField editable", value: @listing.zip_code %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Lot Size</p></div>
+								<div class="col-md-9"><%= f.text_field :sqft, class: "inputField editable", value: @listing.sqft %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Beds</p></div>
+								<div class="col-md-9"><%= f.text_field :bed, class: "inputField editable", value: @listing.bed %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Baths</p></div>
+								<div class="col-md-9"><%= f.text_field :bath, class: "inputField editable", value: @listing.bath %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Status</p></div>
+								<div class="col-md-9"><%= f.text_field :status, class: "inputField editable", value: @listing.status %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Price</p></div>
+								<div class="col-md-9"><%= f.text_field :price, class: "inputField editable", value: @listing.price %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"><p class="attrTitle">Description</p></div>
+								<div class="col-md-9"><%= f.text_area :description, class: "inputField textArea editable", value: @listing.description %></div>
+							</div>
+							<div class="row">
+								<div class="col-md-2 col-md-offset-10"><%= f.submit "Save", class: "btn btn-default saveButton" %></div>
+							</div>
+						<% end %>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4>Listing Agent</h4>
+						<div class="panel panel-default agent-panel">
+							<div class="panel-heading agent-heading">
+								<h4><span class="glyphicon glyphicon-user"></span>&nbsp; Listing Agent</h4>
 							</div>
 							<div class="panel-body">
 								<div class="row">
@@ -80,21 +104,23 @@
 								</div>
 							</div>
 						</div>
-						<h4>Property Events</h4>
-						<% @events.each do |event| %>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<p><%= event.title %></>
+						
+						<div class="panel panel-default listing-panel">
+							<div class="panel-heading listing-heading">
+								<span class="glyphicon glyphicon-time"></span>&nbsp; Property Events
 							</div>
+							<% @events.each do |event| %>
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-3">
+										<p class="attrTitle">Event</p>
 										<p class="attrTitle">Date</p>
 										<p class="attrTitle">Start Time</p>
 										<p class="attrTitle">End Time</p>
 										<p class="attrTitle">Notes</p>
 									</div>
 									<div class="col-md-9">
+										<p class="attrValue"><%= event.title %></p>
 										<p class="attrValue"><%= event.date %></p>
 										<p class="attrValue"><%= event.start_time %></p>
 										<p class="attrValue"><%= event.end_time %></p>
@@ -102,8 +128,8 @@
 									</div>
 								</div>
 							</div>
+							<% end %>
 						</div>
-						<% end %>
 					</div>
 				</div>
 			</div>
