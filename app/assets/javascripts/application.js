@@ -30,15 +30,15 @@ $(document).ready(function() {
     $('.event-body').hide();
 
 	$('#show-events').click(function() {
-		$('.event-body').toggle("blind");
+		$('.event-body').toggle("blind", 100);
 	})
 
 	$('#show-listings').click(function() {
-		$('.listing-body').toggle("blind");
+		$('.listing-body').toggle("blind", 100);
 	})
 
 	$('#show-leads').click(function() {
-		$('.lead-body').toggle("blind");
+		$('.lead-body').toggle("blind", 100);
 	})
 
     $('.panel-body').find('button').hide();
