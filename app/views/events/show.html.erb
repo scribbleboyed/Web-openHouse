@@ -73,6 +73,41 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default listing-panel">
+							<div class="panel-heading listing-heading">
+								<span class="glyphicon glyphicon-time"></span>&nbsp; Agent Details
+							</div>
+							<% if @meeting_agent %>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-1 col-md-offset-2" style="background: url('<%= @meeting_agent.image_url %>') top; width: 100px; height: 100px; background-size: cover">
+										</div>
+										<div class="col-md-2">
+											<p class="attrTitle">Name</p>
+											<p class="attrTitle">Phone</p>
+											<p class="attrTitle">Email</p>
+										</div>
+										<div class="col-md-5">
+											<p class="attrValue"><%= @meeting_agent.full_name %></p>
+											<p class="attrValue"><%= @meeting_agent.phone %></p>
+											<p class="attrValue"><%= @meeting_agent.email %></p>
+										</div>
+									</div>
+								</div>
+							<% else %>
+								<div class="panel-body">
+									No agent for this event
+								</div>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="col-md-6">
 				<div class="row">
 					<div class="col-md-12">

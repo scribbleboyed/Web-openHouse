@@ -2,8 +2,10 @@ class EventsController < ApplicationController
 
 	def create
 		event = Event.new(event_params)
+		event.agent_id = session[:user_id]
 		event.save
 		redirect_to agent_path
+
 	end
 
 	def show
@@ -15,6 +17,9 @@ class EventsController < ApplicationController
 		end
 		if @event.listing_id
 			@listing = Listing.find(@event.listing_id)
+		end
+		if @event.meeting_agent
+			@meeting_agent = Agent.find(@event.meeting_agent)
 		end
 	end
 
@@ -48,7 +53,7 @@ class EventsController < ApplicationController
 	end
 
 	def event_params
-		params.require(:event).permit(:event_type, :title, :date, :start_time, :end_time, :agent_id, :listing_id, :prospect_id, :notes)
+		params.require(:event).permit(:event_type, :title, :date, :start_time, :end_time, :meeting_agent, :listing_id, :prospect_id, :notes)
 	end
 
 

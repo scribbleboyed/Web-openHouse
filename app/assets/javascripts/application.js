@@ -27,6 +27,8 @@ $(document).ready(function() {
 
 	$('[data-toggle="tooltip"]').tooltip(); 
 
+    $('.event-body').hide();
+
 	$('#show-events').click(function() {
 		$('.event-body').toggle("blind");
 	})

@@ -62,11 +62,12 @@
                     <div><%= f.text_field :date, id: "datePicker", class: "form", placeholder: "Date" %></div>
                     <div><%= f.text_field :start_time, class: "form", placeholder: "Start Time" %></div>
                     <div><%= f.text_field :end_time, class: "form", placeholder: "End Time" %></div>
-                    <div>Agent <%= f.collection_select :agent_id, Agent.all, :id, :full_name, :prompt => true %></div>
+                    <div><%= f.text_field :notes, class: "form", placeholder: "Notes" %></div>
+                    <br/>
+                    <div>Agent <%= f.collection_select :meeting_agent, Agent.all, :id, :full_name, :prompt => true %></div>
                     <div>Listing <%= f.collection_select :listing_id, Listing.all, :id, :address, :prompt => true %></div>
                     <div>Prospect <%= f.collection_select :prospect_id, Prospect.all, :id, :full_name, :prompt => true %></div>
-                    <div><%= f.text_field :notes, class: "form", placeholder: "Notes" %></div>
-                    
+
                     <%= f.submit "Submit", class: "btn btn-default" %>
                   <% end %>
                 </div>
@@ -77,6 +78,13 @@
 
           <div class="view">
               <div class="panel panel-default event-panel">
+
+                <% if @events.count == 0 %>
+                  <div class="panel-heading event-heading">
+                    No upcoming events
+                  </div>
+                <% end %>
+
                 <% @events.each do |event| %>
                   <div class="panel-heading event-heading collapsable">
                     <div class="row">
@@ -183,6 +191,13 @@
 
             <div class="panel panel-default listing-panel">
 
+              <% if @listings.count == 0 %>
+                <div class="panel-heading listing-heading">
+                  No listings
+                </div>
+              <% end %>
+                
+
               <% @listings.each do |listing| %>
               <div class="panel-heading listing-heading collapsable">
                 <div class="row">
@@ -268,6 +283,12 @@
           <div class="view">
 
             <div class="panel panel-default prospect-panel">
+
+              <% if @prospects.count == 0 %>
+                <div class="panel-heading prospect-heading">
+                  No leads
+                </div>
+              <% end %>
 
               <% @prospects.each do |prospect| %>
 

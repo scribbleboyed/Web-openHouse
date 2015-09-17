@@ -37,7 +37,7 @@
 						<%= form_for(:listing, url: edit_listing_path) do |f| %>
 							<div class="row">
 								<div class="col-md-3"><p class="attrTitle">Address</p></div>
-								<div class="col-md-9"><%= f.text_field :address, class: "inputField editable", value: @listing.address %></div>
+								<div class="col-md-9"><%= f.text_field :address_1, class: "inputField editable", value: @listing.address_1 %></div>
 							</div>
 							<div class="row">
 								<div class="col-md-3"><p class="attrTitle">City</p></div>
@@ -53,7 +53,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-3"><p class="attrTitle">Lot Size</p></div>
-								<div class="col-md-9"><%= f.text_field :sqft, class: "inputField editable", value: @listing.sqft %> sqft</div>
+								<div class="col-md-9"><%= f.text_field :sqft, class: "inputField editable", value: @listing.sqft %></div>
 							</div>
 							<div class="row">
 								<div class="col-md-3"><p class="attrTitle">Beds</p></div>
@@ -69,7 +69,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-3"><p class="attrTitle">Price</p></div>
-								<div class="col-md-9">$<%= f.text_field :price, class: "inputField editable", value: @listing.price %></div>
+								<div class="col-md-9"><%= f.text_field :price, class: "inputField editable", value: @listing.price %></div>
 							</div>
 							<div class="row">
 								<div class="col-md-3"><p class="attrTitle">Description</p></div>
@@ -95,12 +95,14 @@
 							</div>
 							<div class="panel-body">
 								<div class="row">
-									<div class="col-md-3">
+									<div class="col-md-1 col-md-offset-2" style="background: url('<%= @agent.image_url %>') top; width: 100px; height: 100px; background-size: cover">
+									</div>
+									<div class="col-md-2">
 										<p class="attrTitle">Name</p>
 										<p class="attrTitle">Phone #</p>
 										<p class="attrTitle">Email</p>
 									</div>
-									<div class="col-md-9">
+									<div class="col-md-4">
 										<p class="attrValue"><%= @listing_agent.full_name %></p>
 										<p class="attrValue"><%= @listing_agent.phone %></p>
 										<p class="attrValue"><%= @listing_agent.email %></p>
