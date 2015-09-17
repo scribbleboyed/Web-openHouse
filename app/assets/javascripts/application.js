@@ -48,6 +48,28 @@ $(document).ready(function() {
         }
     );
 
+    var messageDiv = $('#messageDiv');
+
+    $('#messageButton').click(function() {
+        if (messageDiv.hasClass('shown')) {
+            messageDiv.animate({
+                right: "-=300px"
+            }, "fast");
+            $('#bodyDiv').animate({
+                right: "-=100px"
+            }, "slow");
+            messageDiv.removeClass('shown');
+        } else {
+            messageDiv.animate({
+                right: "+=300px"
+            }, "fast");
+            $('#bodyDiv').animate({
+                right: "+=100px"
+            }, "slow");
+            messageDiv.addClass('shown');
+        }
+    })
+
     $('.inputField').attr('disabled','disabled');
 
     $('#edit-event').click(function() {

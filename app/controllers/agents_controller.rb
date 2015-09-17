@@ -6,12 +6,18 @@ class AgentsController < ApplicationController
     @events = @agent.events
     @events << Event.where(meeting_agent: @agent.id)
     @events.flatten
+
+    @chats = []
+    ChatAgent.where(agent_id: @agent.id).each do |chatagent|
+      @chats << Chat.find(chatagent.chat_id)
+    end
+
   end
 
   def update
   	agent_id = session[:user_id]
     @agent = Agent.find(agent_id)
-	@agent.update_attributes(agent_params)
+	 @agent.update_attributes(agent_params)
 	redirect_to agent_path
   end
 

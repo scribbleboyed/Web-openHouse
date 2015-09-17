@@ -4,7 +4,10 @@ class ListingsController < ApplicationController
 		@agent = Agent.find(session[:user_id])
 		@listing = Listing.find(params[:id])
 		@listing_agent = @listing.agent
-		@events = Event.where(listing_id: @listing.id)
+		@events = []
+		EventListing.where(listing_id: @listing.id).each do |eventlisting|
+			@events << Event.find(eventlisting.event_id)
+		end
 	end
 
 	def create
