@@ -4,6 +4,8 @@ class AgentsController < ApplicationController
   	@listings = @agent.listings
   	@prospects = @agent.prospects
     @events = @agent.events
+    @events << Event.where(meeting_agent: @agent.id)
+    @events.flatten
   end
 
   def update
