@@ -8,6 +8,9 @@ class Agent < ActiveRecord::Base
 	has_many :open_houses
 	has_many :events
 
+	has_many :messages
+	has_many :chats, through: :chat_agents
+
 	def full_name
       "#{first_name} #{last_name}"
     end

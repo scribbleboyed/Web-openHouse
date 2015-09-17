@@ -5,7 +5,7 @@ class EventsController < ApplicationController
 		event.agent_id = session[:user_id]
 		event.save
 
-		if params[:agents]
+		if params[:agents][0] != ""
 			sel_agent_ids = params[:agents]
 			sel_agent_ids.each do |agent_id|
 				eventagent = EventAgent.new(event_id: event.id, agent_id: agent_id)
@@ -13,7 +13,7 @@ class EventsController < ApplicationController
 			end
 		end
 
-		if params[:listings]
+		if params[:listings][0] != ""
 			sel_listing_ids = params[:listings]
 			sel_listing_ids.each do |listing_id|
 				eventlisting = EventListing.new(event_id: event.id, listing_id: listing_id)
@@ -21,7 +21,7 @@ class EventsController < ApplicationController
 			end
 		end
 
-		if params[:prospects]
+		if params[:prospects][0] != ""
 			sel_prospect_ids = params[:prospects]
 			sel_prospect_ids.each do |prospect_id|
 				eventprospect = EventProspect.new(event_id: event.id, prospect_id: prospect_id)

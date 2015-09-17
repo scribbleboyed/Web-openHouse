@@ -65,23 +65,15 @@
                         <div><%= f.text_field :end_time, class: "form", placeholder: "End Time" %></div>
                         <div><%= f.text_field :notes, class: "form", placeholder: "Notes" %></div>
                       </div>
-                      <div class="col-md-2">
+                      <div class="col-md-3">
                         <h4>Add Agent:</h4>
-                        <% Agent.all.each do |agent| %>
-                          <div> <%= check_box_tag "agents[]", agent.id %> <%= label_tag(agent.full_name) %> </div>
-                        <% end %>
-                      </div>
-                      <div class="col-md-5">
-                        <h4>Add Listing:</h4>
-                        <% Listing.all.each do |listing| %>
-                          <div> <%= check_box_tag "listings[]", listing.id %> <%= label_tag(listing.address) %> </div>
-                        <% end %>
-                      </div>
-                      <div class="col-md-2">
+                        <%= select_tag "agents[]", options_from_collection_for_select(Agent.all, "id", "full_name"), :multiple=>true, :id => "agentListBox", :include_blank => true %>
                         <h4>Add Lead:</h4>
-                        <% Prospect.all.each do |prospect| %>
-                          <div> <%= check_box_tag "prospects[]", prospect.id %> <%= label_tag(prospect.full_name) %> </div>
-                        <% end %>
+                         <%= select_tag "prospects[]", options_from_collection_for_select(@prospects, "id", "full_name"), :multiple=>true, :id => "prospectListBox", :include_blank => true %>
+                      </div>
+                      <div class="col-md-6">
+                        <h4>Add Listing:</h4>
+                        <%= select_tag "listings[]", options_from_collection_for_select(@listings, "id", "address"), :multiple=>true, :id => "listingListBox", :include_blank => true %>
                       </div>
                     </div>
                     <%= f.submit "Submit", class: "btn btn-default" %>

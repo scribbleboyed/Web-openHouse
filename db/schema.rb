@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916221707) do
+ActiveRecord::Schema.define(version: 20150917204539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,21 @@ ActiveRecord::Schema.define(version: 20150916221707) do
     t.datetime "updated_at",      null: false
     t.string   "image_url"
     t.string   "website"
+  end
+
+  create_table "chat_agents", force: :cascade do |t|
+    t.integer  "chat_id"
+    t.integer  "agent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "chat_agents", ["agent_id"], name: "index_chat_agents_on_agent_id", using: :btree
+  add_index "chat_agents", ["chat_id"], name: "index_chat_agents_on_chat_id", using: :btree
+
+  create_table "chats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "event_agents", force: :cascade do |t|
@@ -97,6 +112,18 @@ ActiveRecord::Schema.define(version: 20150916221707) do
 
   add_index "listings", ["agent_id"], name: "index_listings_on_agent_id", using: :btree
 
+  create_table "messages", force: :cascade do |t|
+    t.integer  "agent_id"
+    t.integer  "chat_id"
+    t.string   "body"
+    t.boolean  "read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "messages", ["agent_id"], name: "index_messages_on_agent_id", using: :btree
+  add_index "messages", ["chat_id"], name: "index_messages_on_chat_id", using: :btree
+
   create_table "open_houses", force: :cascade do |t|
     t.integer  "listing_id"
     t.integer  "agent_id"
@@ -126,6 +153,8 @@ ActiveRecord::Schema.define(version: 20150916221707) do
   add_index "prospects", ["agent_id"], name: "index_prospects_on_agent_id", using: :btree
   add_index "prospects", ["open_house_id"], name: "index_prospects_on_open_house_id", using: :btree
 
+  add_foreign_key "chat_agents", "agents"
+  add_foreign_key "chat_agents", "chats"
   add_foreign_key "event_agents", "agents"
   add_foreign_key "event_agents", "events"
   add_foreign_key "event_listings", "events"
@@ -136,6 +165,8 @@ ActiveRecord::Schema.define(version: 20150916221707) do
   add_foreign_key "events", "listings"
   add_foreign_key "events", "prospects"
   add_foreign_key "listings", "agents"
+  add_foreign_key "messages", "agents"
+  add_foreign_key "messages", "chats"
   add_foreign_key "open_houses", "agents"
   add_foreign_key "open_houses", "listings"
   add_foreign_key "prospects", "agents"
