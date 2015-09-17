@@ -4,6 +4,31 @@ class EventsController < ApplicationController
 		event = Event.new(event_params)
 		event.agent_id = session[:user_id]
 		event.save
+
+		if params[:agents]
+			sel_agent_ids = params[:agents]
+			sel_agent_ids.each do |agent_id|
+				eventagent = EventAgent.new(event_id: event.id, agent_id: agent_id)
+				eventagent.save
+			end
+		end
+
+		if params[:listings]
+			sel_listing_ids = params[:listings]
+			sel_listing_ids.each do |listing_id|
+				eventlisting = EventListing.new(event_id: event.id, listing_id: listing_id)
+				eventlisting.save
+			end
+		end
+
+		if params[:prospects]
+			sel_prospect_ids = params[:prospects]
+			sel_prospect_ids.each do |prospect_id|
+				eventprospect = EventProspect.new(event_id: event.id, prospect_id: prospect_id)
+				eventprospect.save
+			end
+		end
+
 		redirect_to agent_path
 
 	end
@@ -12,15 +37,26 @@ class EventsController < ApplicationController
 		@agent = Agent.find(session[:user_id])
 		event_id = params[:id]
 		@event = Event.find(event_id)
-		if @event.prospect_id
-			@prospect = Prospect.find(@event.prospect_id)
+
+		@agents = []
+		@eventagents = EventAgent.where(event_id: event_id)
+		@eventagents.each do |eventagent|
+			@agents << Agent.find(eventagent.agent_id)
 		end
-		if @event.listing_id
-			@listing = Listing.find(@event.listing_id)
+
+		@listings = []
+		@eventlistings = EventListing.where(event_id: event_id)
+		@eventlistings.each do |eventlisting|
+			@listings << Listing.find(eventlisting.listing_id)
 		end
-		if @event.meeting_agent
-			@meeting_agent = Agent.find(@event.meeting_agent)
+
+		@prospects = []
+		@eventprospects = EventProspect.where(event_id: event_id)
+		@eventprospects.each do |eventprospect|
+			@prospects << Prospect.find(eventprospect.prospect_id)
 		end
+
+
 	end
 
 	def update

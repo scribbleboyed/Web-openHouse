@@ -42,7 +42,7 @@
 <!-- Add Event Modal -->
 
           <div id="addEventModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
 
               <!-- Modal content-->
               <div class="modal-content"  >
@@ -56,18 +56,34 @@
                     <% flash.each do |key,value|  %>
                       <div class="<%= key %>" > <%= value %> </div>
                     <% end %>
-                    
-                    <div><%= f.text_field :event_type, class: "form", placeholder: "Type" %></div>     
-                    <div><%= f.text_field :title, class: "form", placeholder: "Title" %></div>
-                    <div><%= f.text_field :date, id: "datePicker", class: "form", placeholder: "Date" %></div>
-                    <div><%= f.text_field :start_time, class: "form", placeholder: "Start Time" %></div>
-                    <div><%= f.text_field :end_time, class: "form", placeholder: "End Time" %></div>
-                    <div><%= f.text_field :notes, class: "form", placeholder: "Notes" %></div>
-                    <br/>
-                    <div>Agent <%= f.collection_select :meeting_agent, Agent.all, :id, :full_name, :prompt => true %></div>
-                    <div>Listing <%= f.collection_select :listing_id, Listing.all, :id, :address, :prompt => true %></div>
-                    <div>Prospect <%= f.collection_select :prospect_id, Prospect.all, :id, :full_name, :prompt => true %></div>
-
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div><%= f.text_field :event_type, class: "form", placeholder: "Type" %></div>     
+                        <div><%= f.text_field :title, class: "form", placeholder: "Title" %></div>
+                        <div><%= f.text_field :date, id: "datePicker", class: "form", placeholder: "Date" %></div>
+                        <div><%= f.text_field :start_time, class: "form", placeholder: "Start Time" %></div>
+                        <div><%= f.text_field :end_time, class: "form", placeholder: "End Time" %></div>
+                        <div><%= f.text_field :notes, class: "form", placeholder: "Notes" %></div>
+                      </div>
+                      <div class="col-md-2">
+                        <h4>Add Agent:</h4>
+                        <% Agent.all.each do |agent| %>
+                          <div> <%= check_box_tag "agents[]", agent.id %> <%= label_tag(agent.full_name) %> </div>
+                        <% end %>
+                      </div>
+                      <div class="col-md-5">
+                        <h4>Add Listing:</h4>
+                        <% Listing.all.each do |listing| %>
+                          <div> <%= check_box_tag "listings[]", listing.id %> <%= label_tag(listing.address) %> </div>
+                        <% end %>
+                      </div>
+                      <div class="col-md-2">
+                        <h4>Add Lead:</h4>
+                        <% Prospect.all.each do |prospect| %>
+                          <div> <%= check_box_tag "prospects[]", prospect.id %> <%= label_tag(prospect.full_name) %> </div>
+                        <% end %>
+                      </div>
+                    </div>
                     <%= f.submit "Submit", class: "btn btn-default" %>
                   <% end %>
                 </div>
@@ -97,24 +113,39 @@
                     </div>
                   </div>
                   <div class="panel-body event-body">
-                    <% if event.meeting_agent %>
-                      <div class="row">
-                        <div class="col-sm-2 col-md-1 panel-title">Agent</div>
-                        <div class="col-sm-8 col-md-10"><%= Agent.find(event.meeting_agent).full_name %></div>
+                    <div class="row">
+                      <% if EventListing.where(event_id: event.id).count > 0 %>
+                        <div class="col-md-1 panel-title"><h4><b>Listing(s)</b></h4></div>
+                        <div class="col-md-5">
+                          <ul>
+                            <% EventListing.where(event_id: event.id).each do |eventlisting| %>
+                              <li><%= Listing.find(eventlisting.listing_id).address %></li>
+                            <% end %>
+                          </ul>
                       </div>
-                    <% end %>
-                    <% if event.listing_id %>
-                      <div class="row">
-                        <div class="col-sm-2 col-md-1 panel-title">Listing</div>
-                        <div class="col-sm-8 col-md-10"><%= Listing.find(event.listing_id).address %></div>
-                      </div>
-                    <% end %>
-                    <% if event.prospect_id %>
-                      <div class="row">
-                        <div class="col-sm-2 col-md-1 panel-title">Lead</div>
-                        <div class="col-sm-8 col-md-10"><%= Prospect.find(event.prospect).full_name %></div>
-                      </div>
-                    <% end %>
+                      <% end %>
+                      <% if EventAgent.where(event_id: event.id).count > 0 %>
+                        <div class="col-md-1 panel-title"><h4><b>Agent(s)</b></h4></div>
+                          <div class="col-md-2">
+                            <ul>
+                              <% EventAgent.where(event_id: event.id).each do |eventAgent| %>
+                                <li><%= Agent.find(eventAgent.agent_id).full_name %></li>
+                              <% end %>
+                            </ul>
+                          </div>
+
+                      <% end %>
+                      <% if EventProspect.where(event_id: event.id).count > 0 %>
+                        <div class="col-md-1 panel-title"><h4><b>Lead(s)</b></h4></div>
+                        <div class="col-md-2">
+                          <ul>
+                            <% EventProspect.where(event_id: event.id).each do |eventprospect| %>
+                                <li><%= Prospect.find(eventprospect.prospect_id).full_name %></li>
+                            <% end %>
+                          </ul>
+                        </div>
+                      <% end %>
+                    </div>
                     <div class="row">
                       <div class="col-sm-2 col-md-1 panel-title">Notes</div>
                       <div class="col-sm-8 col-md-10"><%= event.notes %><br/>&nbsp;</div>

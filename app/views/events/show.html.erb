@@ -72,6 +72,39 @@
 						<% end %>
 					</div>
 				</div>
+
+						<div class="panel panel-default listing-panel">
+							<div class="panel-heading listing-heading">
+								<span class="glyphicon glyphicon-time"></span>&nbsp; Listing Details
+							</div>
+							<% if @listings.count > 0 %>
+								<% @listings.each do |listing| %>
+									<div class="panel-body">
+										<div class="row listingImage" style="background: url(<%= listing.image_url %>) center no-repeat; height: 250px; background-size: cover;">
+	                					</div>
+										<div class="row">
+											<div class="col-md-3">
+												<p class="attrTitle">Address</p>
+												<p class="attrTitle">City</p>
+												<p class="attrTitle">State</p>
+												<p class="attrTitle">Zip Code</p>
+											</div>
+											<div class="col-md-9">
+												<p class="attrValue"><%= listing.address %></p>
+												<p class="attrValue"><%= listing.city %></p>
+												<p class="attrValue"><%= listing.state %></p>
+												<p class="attrValue"><%= listing.zip_code %></p>
+											</div>
+										</div>
+									</div>
+								<% end %>
+							<% else %>
+								<div class="panel-body">
+									No listings for this event
+								</div>
+							<% end %>
+						</div>
+
 			</div>
 
 			<div class="col-md-6">
@@ -81,26 +114,28 @@
 							<div class="panel-heading listing-heading">
 								<span class="glyphicon glyphicon-time"></span>&nbsp; Agent Details
 							</div>
-							<% if @meeting_agent %>
-								<div class="panel-body">
-									<div class="row">
-										<div class="col-md-1 col-md-offset-2" style="background: url('<%= @meeting_agent.image_url %>') top; width: 100px; height: 100px; background-size: cover">
-										</div>
-										<div class="col-md-2">
-											<p class="attrTitle">Name</p>
-											<p class="attrTitle">Phone</p>
-											<p class="attrTitle">Email</p>
-										</div>
-										<div class="col-md-5">
-											<p class="attrValue"><%= @meeting_agent.full_name %></p>
-											<p class="attrValue"><%= @meeting_agent.phone %></p>
-											<p class="attrValue"><%= @meeting_agent.email %></p>
+							<% if @agents.count > 0 %>
+								<% @agents.each do |agent| %>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-md-1 col-md-offset-2" style="background: url('<%= agent.image_url %>') top; width: 100px; height: 100px; background-size: cover">
+											</div>
+											<div class="col-md-2">
+												<p class="attrTitle">Name</p>
+												<p class="attrTitle">Phone</p>
+												<p class="attrTitle">Email</p>
+											</div>
+											<div class="col-md-5">
+												<p class="attrValue"><%= agent.full_name %></p>
+												<p class="attrValue"><%= agent.phone %></p>
+												<p class="attrValue"><%= agent.email %></p>
+											</div>
 										</div>
 									</div>
-								</div>
+								<% end %>
 							<% else %>
 								<div class="panel-body">
-									No agent for this event
+									No agents for this event
 								</div>
 							<% end %>
 						</div>
@@ -111,64 +146,32 @@
 			<div class="col-md-6">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="panel panel-default listing-panel">
-							<div class="panel-heading listing-heading">
-								<span class="glyphicon glyphicon-time"></span>&nbsp; Listing Details
-							</div>
-							<% if @listing %>
-								<div class="panel-body">
-									<div class="row listingImage" style="background: url(<%= @listing.image_url %>) center no-repeat; height: 250px; background-size: cover;">
-                					</div>
-									<div class="row">
-										<div class="col-md-3">
-											<p class="attrTitle">Address</p>
-											<p class="attrTitle">City</p>
-											<p class="attrTitle">State</p>
-											<p class="attrTitle">Zip Code</p>
-										</div>
-										<div class="col-md-9">
-											<p class="attrValue"><%= @listing.address %></p>
-											<p class="attrValue"><%= @listing.city %></p>
-											<p class="attrValue"><%= @listing.state %></p>
-											<p class="attrValue"><%= @listing.zip_code %></p>
-										</div>
-									</div>
-								</div>
-							<% else %>
-								<div class="panel-body">
-									No listing for this event
-								</div>
-							<% end %>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-md-12">
 						<div class="panel panel-default prospect-panel">
 							<div class="panel-heading prospect-heading">
 								<span class="glyphicon glyphicon-time"></span>&nbsp; Lead Details
 							</div>
-							<% if @prospect %>
-								<div class="panel-body">
-									<div class="row">
-										<div class="col-md-3">
-											<p class="attrTitle">Name</p>
-											<p class="attrTitle">Phone</p>
-											<p class="attrTitle">Email</p>
-											<p class="attrTitle">Notes</p>
-										</div>
-										<div class="col-md-9">
-											<p class="attrValue"><%= @prospect.full_name %></p>
-											<p class="attrValue"><%= @prospect.phone %></p>
-											<p class="attrValue"><%= @prospect.email %></p>
-											<p class="attrValue"><%= @prospect.notes %></p>
+							<% if @prospects.count > 0 %>
+								<% @prospects.each do |prospect| %>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-md-3">
+												<p class="attrTitle">Name</p>
+												<p class="attrTitle">Phone</p>
+												<p class="attrTitle">Email</p>
+												<p class="attrTitle">Notes</p>
+											</div>
+											<div class="col-md-9">
+												<p class="attrValue"><%= prospect.full_name %></p>
+												<p class="attrValue"><%= prospect.phone %></p>
+												<p class="attrValue"><%= prospect.email %></p>
+												<p class="attrValue"><%= prospect.notes %></p>
+											</div>
 										</div>
 									</div>
-								</div>
+								<% end %>
 							<% else %>
 								<div class="panel-body">
-									No listing for this event
+									No leads for this event
 								</div>
 							<% end %>
 						</div>
