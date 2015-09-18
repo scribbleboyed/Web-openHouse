@@ -1,10 +1,15 @@
 == Agent Manual 
 
-Web application for real estate agents to keep track of listings, leads and upcoming events. Users are able to:
+Agent Manual is a management tool for real estate agents to keep track of listings, leads and upcoming events. This app contains many features that allow users to:
 
 1. Track property listings
 2. Track potential leads
 3. Create events and add referenced listings, leads or agents to an event
+4. Stay in network with fellow agents in your area
+5. Create beautiful user-friendly sign-in pages for your open house visitors
+6. Manage your lead activities and help you keep on track reaching out to every one of your leads to earn their business
+
+Agent Manual was made during a one week project sprint after two weeks training in the Ruby on Rails language.
 
 ===Technology 
 
