@@ -1,3 +1,11 @@
 == Agent Manual 
 
-WIP web application for real estate agents to keep track of listings, leads and upcoming events.  Website uses Ruby on HTML, CSS, JQuery, Ruby on Rails and PostgreSQL.
+Web application for real estate agents to keep track of listings, leads and upcoming events. Users are able to:
+
+1. Track property listings
+2. Track potential leads
+3. Create events and add referenced listings, leads or agents to an event
+
+===Technology 
+
+Application is made using HTML, CSS, JQuery, Ruby on Rails and PostgreSQL.
